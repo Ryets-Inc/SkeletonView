@@ -36,13 +36,13 @@ extension UITableViewHeaderFooterView {
 
 extension UICollectionView {
     override var subviewsToSkeleton: [UIView] {
-        subviews
+        subviews.filter { $0.isSkeletonable }
     }
 }
 
 extension UICollectionViewCell {
     override var subviewsToSkeleton: [UIView] {
-        contentView.subviews
+        contentView.subviews.filter { $0.isSkeletonable }
     }
 }
 
