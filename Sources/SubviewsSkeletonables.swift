@@ -24,7 +24,7 @@ extension UITableView {
 
 extension UITableViewCell {
     override var subviewsToSkeleton: [UIView] {
-        contentView.subviews
+        contentView.allSubviews.filter { $0.isSkeletonable }
     }
 }
 
@@ -42,12 +42,18 @@ extension UICollectionView {
 
 extension UICollectionViewCell {
     override var subviewsToSkeleton: [UIView] {
-        contentView.subviews.filter { $0.isSkeletonable }
+        contentView.allSubviews.filter { $0.isSkeletonable }
     }
 }
 
 extension UIStackView {
     override var subviewsToSkeleton: [UIView] {
         arrangedSubviews
+    }
+}
+
+extension UIView {
+    var allSubviews: [UIView] {
+        return self.subviews.flatMap { [$0] + $0.allSubviews }
     }
 }
